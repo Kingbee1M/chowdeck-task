@@ -2,6 +2,7 @@ import { View, Image, StyleSheet, Text, SafeAreaView, ScrollView, StatusBar, Pla
 import Header from '@/components/Header';
 import Services from '@/components/Services';
 import ImageSlider from '@/components/ImageSlider';
+import Explore from '@/components/Explore';
 const restaurantImg = require('@/assets/images/restaurant-building.png');
 const supermarketImg = require('@/assets/images/super-market.png');
 const pharmacyImg = require('@/assets/images/pharmacy.png');
@@ -76,6 +77,7 @@ export default function HomeScreen() {
             ))}
         </View>
         <ImageSlider images={sliderImages2} />
+        <Explore />
         </View>
       </ScrollView>
     </SafeAreaView>
