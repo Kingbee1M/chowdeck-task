@@ -84,7 +84,11 @@ const styles = StyleSheet.create({
         width: "100%",
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        position: "relative",
+        top: 0,
+        right: 0,
+        left: 0
       },
       header1: {
         flexDirection: "row",

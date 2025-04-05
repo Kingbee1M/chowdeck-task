@@ -8,7 +8,8 @@ export default function Explore() {
   const resturantsDisplay = useResturantStore((state) => state.resturantsDisplay);
   
   return (
-    <View>
+    <View style={styles.exploreContainer}>
+      <Text style={styles.explore}>Explore</Text>
         <FlatList
         horizontal
             data={resturantsDisplay}
@@ -28,6 +29,13 @@ const styles = StyleSheet.create({
   itemContainer: {
     alignItems: 'center',
     padding: 10,
+  },
+  explore: {
+    fontSize: 17,
+  },
+  exploreContainer: {
+    marginVertical: 10,
+    gap: 10,
   },
   logos: {
     width: 50,
