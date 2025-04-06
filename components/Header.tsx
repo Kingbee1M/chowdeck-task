@@ -85,10 +85,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        position: "relative",
-        top: 0,
-        right: 0,
-        left: 0
       },
       header1: {
         flexDirection: "row",

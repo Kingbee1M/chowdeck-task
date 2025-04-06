@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import { useResturantStore } from '@/states/useResturantStore'
-import { useEffect } from 'react';
 
 
 export default function Explore() {
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
   exploreContainer: {
     marginVertical: 10,
     gap: 10,
+    height: 110,
   },
   logos: {
     width: 50,

@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Services from '@/components/Services';
 import ImageSlider from '@/components/ImageSlider';
 import Explore from '@/components/Explore';
+import FoodList from '@/components/FoodList';
 const restaurantImg = require('@/assets/images/restaurant-building.png');
 const supermarketImg = require('@/assets/images/super-market.png');
 const pharmacyImg = require('@/assets/images/pharmacy.png');
@@ -78,6 +79,8 @@ export default function HomeScreen() {
         </View>
         <ImageSlider images={sliderImages2} />
         <Explore />
+        <FoodList title={"Features"} emoji={"star"} color={"yellow"} />        
+        <FoodList title={"Features"} emoji={"heart"} color={"green"}/>        
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -86,14 +89,11 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   safe: {
-    flex: 1
   },
   scrollView: {
     marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    flexGrow: 1,
   },
   scrollViewContent: {
-    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center"
   },
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
+    marginBottom: 100
   },
   image: {
     width: "100%",
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
   },
   serviceContainer: {
     width: "100%",
-    minHeight: "30%",
+    height: "20%",
     flexDirection: "row",
     flexWrap: "wrap",
     rowGap: 15,
