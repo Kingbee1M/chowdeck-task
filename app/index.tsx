@@ -1,19 +1,40 @@
+// app/auth.tsx
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, Image, StyleSheet } from "react-native";
 import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
-import { useNavigation } from "@react-navigation/native";
+import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
+import { router } from "expo-router";
+
+// Google discovery endpoints
+const discovery = {
+  authorizationEndpoint: "https://accounts.google.com/o/oauth2/v2/auth",
+  tokenEndpoint: "https://oauth2.googleapis.com/token",
+};
 
 WebBrowser.maybeCompleteAuthSession();
 
-export default function AuthScreen() {
-  const navigation = useNavigation();
-  const [userInfo, setUserInfo] = useState(null);
+interface GoogleUser {
+  id?: string;
+  email?: string;
+  name?: string;
+  picture?: string;
+  [key: string]: any;
+}
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    expoClientId:
-      "153615692711-4nmgobkvqkn09950ot98bvu814attcj5.apps.googleusercontent.com",
-  });
+export default function AuthScreen() {
+  const [userInfo, setUserInfo] = useState<GoogleUser | null>(null);
+
+  const [request, response, promptAsync] = useAuthRequest(
+    {
+      clientId:
+        "153615692711-4nmgobkvqkn09950ot98bvu814attcj5.apps.googleusercontent.com",
+      redirectUri: makeRedirectUri({
+        scheme: "myapp", // Must match app.json
+      }),
+      scopes: ["openid", "profile", "email"],
+    },
+    discovery
+  );
 
   useEffect(() => {
     if (response?.type === "success") {
@@ -24,12 +45,18 @@ export default function AuthScreen() {
 
   const fetchUserInfo = async (token: string | undefined) => {
     try {
+      if (!token) throw new Error("No access token");
+
       const res = await fetch("https://www.googleapis.com/userinfo/v2/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const user = await res.json();
+      const user: GoogleUser = await res.json();
       setUserInfo(user);
-      navigation.navigate("index", { user }); // 🔁 Redirect to Home with user data
+
+      router.push({
+        pathname: "/Home",
+        params: { user: JSON.stringify(user) },
+      });
     } catch (error) {
       console.error("Failed to fetch user info", error);
     }
