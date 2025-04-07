@@ -174,3 +174,7 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
+        implementation project(':react-native-google-signin')
+      

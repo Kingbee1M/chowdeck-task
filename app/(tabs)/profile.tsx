@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   hr: {
     borderBottomColor: "#ccc",
     borderBottomWidth: 1,
-    marginVertical: 10,
+    marginVertical: 5,
     width: "90%",
     alignSelf: "center",
   },
