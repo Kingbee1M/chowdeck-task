@@ -1,14 +1,17 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
+import { Image, Platform, StyleSheet } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { useGlobalSearchParams } from "expo-router";
 
 export default function TabLayout() {
+  const params = useGlobalSearchParams();
+  const userPhoto = params.userPhoto as string;
   return (
     <Tabs
       screenOptions={{
@@ -66,11 +69,25 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="user" size={25} color={color} />
+          tabBarIcon: () => (
+            <Image
+              source={{
+                uri:
+                  userPhoto ||
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI9lRck6miglY0SZF_BZ_sK829yiNskgYRUg&s",
+              }}
+              style={styles.userImg}
+            />
           ),
         }}
       />
     </Tabs>
   );
 }
+const styles = StyleSheet.create({
+  userImg: {
+    width: 25,
+    height: 25,
+    borderRadius: 75,
+  },
+});
