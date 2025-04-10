@@ -46,7 +46,6 @@ export default {
       ],
       "@react-native-firebase/app",
       "@react-native-firebase/auth",
-
       [
         "expo-build-properties",
         {
@@ -60,6 +59,24 @@ export default {
     ],
     experiments: {
       typedRoutes: true,
+    },
+    updates: {
+      url: "https://u.expo.dev/8b594901-9842-4902-8da7-62d0cf983eee", // Add this
+    },
+    android: {
+      runtimeVersion: "1.0.0", // Add this
+      adaptiveIcon: {
+        foregroundImage: "./assets/images/adaptive-icon.png",
+        backgroundColor: "#ffffff",
+      },
+      package: "com.anonymous.chowdeck",
+      googleServicesFile: "./google-services.json",
+    },
+    ios: {
+      runtimeVersion: {
+        policy: "appVersion", // Add this
+      },
+      supportsTablet: true,
     },
     extra: {
       firebase: {

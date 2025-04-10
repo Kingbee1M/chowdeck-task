@@ -7,11 +7,11 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-import { useGlobalSearchParams } from "expo-router";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 export default function TabLayout() {
-  const params = useGlobalSearchParams();
-  const userPhoto = params.userPhoto as string;
+  const user = useSelector((state: RootState) => state.auth);
   return (
     <Tabs
       screenOptions={{
@@ -73,8 +73,8 @@ export default function TabLayout() {
             <Image
               source={{
                 uri:
-                  userPhoto ||
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI9lRck6miglY0SZF_BZ_sK829yiNskgYRUg&s",
+                  user.photo ||
+                  "https://icon-library.com/images/male-avatar-icon/male-avatar-icon-4.jpg",
               }}
               style={styles.userImg}
             />
