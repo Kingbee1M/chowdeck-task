@@ -1,31 +1,47 @@
-import { Text, ScrollView, Image, StyleSheet, View } from "react-native";
+import {
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+  View,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import OptionSetting from "@/components/OptionsSetting";
-import { useGlobalSearchParams } from "expo-router";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store";
+import { logout } from "../../store/authSlice";
+import { router } from "expo-router";
+import LogoutButton from "@/components/LogoutButton";
 
 export default function Profile() {
-  const params = useGlobalSearchParams();
-  const userName = params.userName as string;
-  const userPhoto = params.userPhoto as string;
-  console.log(userPhoto);
-  console.log(userName);
-  console.log(params);
+  const user = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.replace("/Authscreen");
+  };
+
   return (
     <ScrollView>
       <View style={styles.userContent}>
         <Image
           source={{
             uri:
-              userPhoto ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI9lRck6miglY0SZF_BZ_sK829yiNskgYRUg&s",
+              user.photo ||
+              "https://icon-library.com/images/male-avatar-icon/male-avatar-icon-4.jpg",
           }}
           style={styles.userImg}
         />
-        <Text style={styles.userName}>{userName || "Guest"}</Text>
+        <Text style={styles.userName}>{user.name || "Guest"}</Text>
+        <LogoutButton onPress={handleLogout} />
       </View>
       <OptionSetting />
     </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
   userContent: {
     alignItems: "center",
@@ -40,7 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f0f0f0",
   },
   userName: {
-    fontWeight: 600,
+    fontWeight: "600",
     fontSize: 25,
     padding: 20,
   },

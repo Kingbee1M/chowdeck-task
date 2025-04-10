@@ -70,7 +70,7 @@ export default function OptionSetting() {
         <View style={styles.hr} />
         <TouchableOpacity style={styles.details}>
           <View style={styles.userSubDetail}>
-            <Icon style={styles.icon} name="location" />
+            <Icon style={styles.icon} name="question" />
             <Text style={styles.detailsText}> FAQs</Text>
           </View>
           <Text style={styles.detailsTextArrow}>&gt;</Text>
